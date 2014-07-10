@@ -1,0 +1,23 @@
+<h1>Listing products</h1>
+<% if @products.present? %>
+	<%= paginate @products %>
+
+
+<% for product in @products %>
+
+<div class="product">
+  <h2> <%= link_to product.name, product %></h2>
+  <div class="details">
+    <%= number_to_currency(product.price) %>
+Released <%= product.released_at.strftime("%B %e,%Y") %>
+</div>
+</div>
+ <%= image_tag  product.image.url(:thumb).to_s %>	
+ <br/>
+ <%= link_to 'Edit', edit_product_path(product) %>
+<%= link_to 'Delete', product_path(product) ,:method => :delete, :confirm => " Emin misin.? "  %>
+<%end%>
+<% end %>
+<br />
+
+<%= link_to 'New Product', new_product_path %>
